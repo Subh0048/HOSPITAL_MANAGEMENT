@@ -1,0 +1,6 @@
+# HOSPITAL MANAGEMENT SYSTEM
+
+
+
+
+
