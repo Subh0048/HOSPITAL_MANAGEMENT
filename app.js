@@ -4,7 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import { dbconnection } from "./database/DBconnection.js";
-import messagerouter from "./routers/messagerouter.js"
+import messagerouter from "./routers/messagerouter.js";
+import{errorMiddleware} from "./middlewares/errormiddleware.js"
 
 const app = express();
 config({ path: "./.env" });
@@ -29,5 +30,6 @@ app.use(fileUpload(
 app.use("/api/v1/message",messagerouter)
 
 dbconnection()
+app.use(errorMiddleware)
 
 export default app;

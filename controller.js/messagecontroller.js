@@ -1,12 +1,11 @@
 import {message} from "../models/message.models.js";
+import { catchasyncerror } from "../middlewares/catchasyncerror.js";
+import ErrorHandler from "../middlewares/errormiddleware.js";
 
-export const sendmessage = async (req, res, next) => {
+export const sendmessage =catchasyncerror( async (req, res, next) => {
   const { firstname, lastname, email, phone, message: messageContent } = req.body;
   if (!firstname || !lastname || !email || !phone || !messageContent) {
-    return res.status(400).json({
-      success: false,
-      message: "please fill all details"
-    });
+    return next(new ErrorHandler("please fill the form ",400))
   }
   try {
     await message.create({ firstname, lastname, email, phone, message: messageContent });
@@ -17,4 +16,4 @@ export const sendmessage = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+})
