@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 
 
-import { sendmessage } from "../controller.js/messagecontroller.js";
+import { sendmessage } from "../controller/messagecontroller.js";
 const router = new Router();
 router.post("/send", sendmessage);
 
