@@ -68,7 +68,7 @@ userschema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-userschema.methods.passwordcompare = async function (enterpassword) {
+userschema.methods.Comparepassword = async function (enterpassword) {
   return await bcrypt.compare(enterpassword, this.password);
 };
 userschema.methods.generatejsonWebToken = function () {
