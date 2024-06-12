@@ -27,12 +27,7 @@ const userschema = Schema({
     minlength: [10, "phone number must contain 10 number"],
     maxlength: [10, "phone number must contain 10 number"],
   },
-  nic: {
-    type: String,
-    required: true,
-    minlength: [10, "NIC  exact contain 13 number character"],
-    maxlength: [10, "NIC must contain 13 number character"],
-  },
+  
   dob: {
     type:String,
     required: true,
@@ -50,7 +45,7 @@ const userschema = Schema({
   role: {
     type: String,
     required: true,
-    enum: ["Admin", "Patient", "student"],
+    enum: ["Admin", "Patient", "doctor"],
   },
   doctordepartment: {
     type: String,
@@ -65,7 +60,7 @@ userschema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password =  await bcrypt.hash(this.password, 10);
 });
 
 userschema.methods.Comparepassword = async function (enterpassword) {
